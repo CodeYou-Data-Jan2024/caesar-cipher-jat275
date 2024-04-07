@@ -1,16 +1,24 @@
-alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+# add your code here
+def encrypt_caesar_cipher(plain_text, shift=5):
+    encrypted_text = ""
+    for char in plain_text:
+        # Check if the character is an uppercase letter
+        if char.isupper():
+            # Find the position in 0-25, shift it, and take modulo 26 to wrap around
+            encrypted_text += chr((ord(char) + shift - 65) % 26 + 65)
+        # Check if the character is a lowercase letter
+        elif char.islower():
+            encrypted_text += chr((ord(char) + shift - 97) % 26 + 97)
+        # If it's not an alphabetic character, don't change it
+        else:
+            encrypted_text += char
+    return encrypted_text
 
-sentence = input("Please enter a sentence: ").lower()
-shift = input("Please enter the number of shifts: ")
-cipher = ""
-for letter in sentence:
+# Ask the user for input
+plain_text = input("Please enter a sentence: ")
 
-  if letter in alphabet:
-    position = alphabet.index(letter)
-    new_position = position + int(shift)
-    new_letter = alphabet[new_position]
-    cipher += new_letter
-  else:
-    new_letter = letter
-    cipher += letter
-print(cipher)
+# Encrypt the input
+encrypted_text = encrypt_caesar_cipher(plain_text)
+
+# Output the encrypted text
+print("The encrypted sentence is:", encrypted_text)
